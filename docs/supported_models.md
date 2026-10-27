@@ -187,11 +187,6 @@ and TurboQuant are not validated.
 
 **Hunyuan on MPS:** use `--generation-config vllm` to override the checkpoint’s unsupported `repetition_penalty=1.05` default.
 
-**MiniCPM4 on MPS:** use the BF16 Hugging Face checkpoint `openbmb/MiniCPM4-0.5B` with
-`--trust-remote-code --dtype bfloat16`. The `*-mlx` conversion is for the MLX
-backend. On a 16 GB MacBook Pro, keep `--max-model-len` modest (for example
-`2048`) under normal desktop load.
-
 sliding-window attention (SWA) is not fully optimized.
 
 ## Diffusion Language Models
