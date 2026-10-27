@@ -166,7 +166,7 @@ and TurboQuant are not validated.
 | Ling-3.0 Tiny | 🔵 | | Hybrid MLA + KDA (paged latent + recurrent state) | 🔵 | `inclusionAI/Ling-3.0-tiny` (BF16 or converted MXFP8) |
 | GLM-4.5 | Not verified | | MLA (paged latent cache, MLX SDPA — no Metal kernel) | Not verified | — |
 | MiniCPM3-4B | ✅ | | MLA (paged latent cache) | ✅ | `mlx-community/MiniCPM3-4B-4bit` |
-| MiniCPM4 | ✅ | | GQA (paged) | ✅ | `openbmb/MiniCPM4-0.5B-mlx` (needs `--trust-remote-code`) |
+| MiniCPM4 | ✅ | 🔵 | GQA (paged) | ✅ | MLX: `openbmb/MiniCPM4-0.5B-mlx`; MPS: `openbmb/MiniCPM4-0.5B` (both need `--trust-remote-code`) |
 | GLM-4.7-Flash | 🔵 | | GQA (paged) | ✅ | `mlx-community/GLM-4.7-Flash-4bit` |
 | DeepSeek-R1-Distill-Qwen | ✅ | | GQA (paged) | ✅ | `mlx-community/DeepSeek-R1-Distill-Qwen-7B-3bit` |
 | Phi-4-mini | ✅ | | GQA packed qkv (paged) | ✅ | `microsoft/Phi-4-mini-instruct` |
@@ -186,6 +186,11 @@ and TurboQuant are not validated.
 | Muse Glimmer | 🔵 | | GQA + per-layer sliding window, gated attention with QK norm (paged) | ✅ | `mlx-community/Muse-Glimmer-30B-4bit` |
 
 **Hunyuan on MPS:** use `--generation-config vllm` to override the checkpoint’s unsupported `repetition_penalty=1.05` default.
+
+**MiniCPM4 on MPS:** use the BF16 Hugging Face checkpoint `openbmb/MiniCPM4-0.5B` with
+`--trust-remote-code --dtype bfloat16`. The `*-mlx` conversion is for the MLX
+backend. On a 16 GB MacBook Pro, keep `--max-model-len` modest (for example
+`2048`) under normal desktop load.
 
 sliding-window attention (SWA) is not fully optimized.
 

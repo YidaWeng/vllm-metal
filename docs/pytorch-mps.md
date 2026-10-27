@@ -13,6 +13,14 @@ VLLM_METAL_BACKEND=mps PYTORCH_ENABLE_MPS_FALLBACK=0 \
   vllm serve Qwen/Qwen3-0.6B --dtype bfloat16
 ```
 
+Another small BF16 example (needs remote code):
+
+```bash
+VLLM_METAL_BACKEND=mps PYTORCH_ENABLE_MPS_FALLBACK=0 \
+  vllm serve openbmb/MiniCPM4-0.5B --dtype bfloat16 --trust-remote-code \
+  --max-model-len 2048
+```
+
 Release wheels include both native launchers and the shared Metal shaders;
 no compiler is needed. Source checkouts use the [development setup](CONTRIBUTING.md#development-setup).
 Selecting MPS defaults to MRv2. Use unquantized FP16/BF16 checkpoints and greedy
